@@ -351,7 +351,9 @@ def write_page(layout, out, title, desc, nav_slug, scripts, body):
     # cache-bust our own CSS/JS: the ?v= changes whenever the file content changes, so browsers fetch the new file
     def bust(m):
         f = ROOT / m.group(2)
-        return f'{m.group(1)}"{m.group(2)}?v={hashlib.sha1(f.read_bytes()).hexdigest()[:8]}"' if f.exists() else m.group(0)
+        # hash with LF line endings so a Windows CRLF checkout does not change the version of an unchanged file
+        data = f.read_bytes().replace(b"\r\n", b"\n")
+        return f'{m.group(1)}"{m.group(2)}?v={hashlib.sha1(data).hexdigest()[:8]}"' if f.exists() else m.group(0)
     page = re.sub(r'(src=|href=)"(assets/[\w.-]+\.(?:css|js))"', bust, page)
     assert "{{" not in page, f"unfilled placeholder in {out}"
     (ROOT / out).write_text(page, encoding="utf-8", newline="\n")
