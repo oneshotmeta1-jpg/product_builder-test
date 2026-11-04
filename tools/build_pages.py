@@ -383,6 +383,42 @@ def build():
     for lk in looks:
         write_page(layout, f"look-{lk['no']}.html", f"LOOK {lk['no']} {lk['title']} - STYL.AI",
                    lk["meta_description"], "lookbook", [], render_look(lk, looks))
+    write_sitemap(looks)
+
+
+# pages with real content for search engines; saved.html (per-visitor, empty for a crawler) and 404.html stay out
+SITEMAP_PAGES = ["index.html", "lookbook.html", "guide.html", "recommend.html", "closet.html",
+                 "about.html", "contact.html", "privacy.html", "affiliate.html"]
+
+
+def write_sitemap(looks):
+    """sitemap.xml + robots.txt. lastmod is the newest change date of the page's own source files in git."""
+    import subprocess
+    from datetime import date
+
+    def last_change(*paths):
+        try:
+            out = subprocess.run(["git", "log", "-1", "--format=%cs", "--", *paths], cwd=ROOT,
+                                 capture_output=True, text=True, check=True).stdout.strip()
+            return out or date.today().isoformat()
+        except Exception:
+            return date.today().isoformat()
+
+    src_of = {"index.html": "src/pages/home.html", "lookbook.html": "src/looks", "404.html": "src/pages/notfound.html"}
+    pages = list(SITEMAP_PAGES) + [f"look-{lk['no']}.html" for lk in looks]
+    rows = []
+    for out in pages:
+        if out.startswith("look-"):
+            src = f"src/looks/{out[:-5]}.json"
+        else:
+            src = src_of.get(out, f"src/pages/{out}")
+        loc = SITE + ("" if out == "index.html" else out[:-len(".html")])
+        rows.append(f"  <url><loc>{loc}</loc><lastmod>{last_change(src)}</lastmod></url>")
+    xml = ('<?xml version="1.0" encoding="UTF-8"?>\n'
+           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(rows) + "\n</urlset>\n")
+    (ROOT / "sitemap.xml").write_text(xml, encoding="utf-8", newline="\n")
+    (ROOT / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {SITE}sitemap.xml\n", encoding="utf-8", newline="\n")
+    print("built sitemap.xml", len(rows), "urls, robots.txt")
 
 
 if __name__ == "__main__":
