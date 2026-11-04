@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5S611CMYY9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5S611CMYY9');
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4209565942014151"
+    crossorigin="anonymous"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>내 옷장 - STYL.AI</title>
+  <meta name="description" content="가진 옷을 사진으로 등록하면 공개된 규칙표에 따라 내 옷으로 만든 출근 코디 조합과 이유를 보여 줍니다. 사진은 브라우저에만 저장됩니다.">
+  <link rel="canonical" href="https://ai-stylelist.pages.dev/closet">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="STYL.AI">
+  <meta property="og:title" content="내 옷장 - STYL.AI">
+  <meta property="og:description" content="가진 옷을 사진으로 등록하면 공개된 규칙표에 따라 내 옷으로 만든 출근 코디 조합과 이유를 보여 줍니다. 사진은 브라우저에만 저장됩니다.">
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="assets/tw-config.js?v=c2daf7a7"></script>
+  <link rel="stylesheet" href="assets/site.css?v=2b0ab014">
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col antialiased selection:bg-secondary/20" data-page="closet">
+
+  <a href="#main" class="skip-link">본문 바로가기</a>
+
+  <header class="fixed top-0 left-0 right-0 z-50 pt-safe bg-surface/90 backdrop-blur-xl border-b border-hairline-border">
+    <div class="h-14 app-viewport px-4 flex items-center justify-between">
+      <a href="./" class="flex items-center gap-2" aria-label="STYL.AI 홈">
+        <span class="w-8 h-8 rounded bg-primary text-white flex items-center justify-center font-headline-md text-sm font-bold">S</span>
+        <span class="flex flex-col">
+          <span class="font-headline-md text-[20px] tracking-wider text-primary leading-none">STYL.AI</span>
+          <span class="text-[9px] font-semibold uppercase tracking-[0.18em] text-on-surface-variant/80">Office Style Guide</span>
+        </span>
+      </a>
+      <a href="saved.html" class="h-9 px-3 rounded-full border border-hairline-border bg-white flex items-center gap-1 text-[12px] font-semibold text-primary hover:bg-fresh-beige" aria-label="저장 목록">
+        <span class="material-symbols-outlined text-[18px]">bookmarks</span>
+        <span>저장 목록</span>
+        <span class="saved-count text-secondary" aria-hidden="true"></span>
+      </a>
+    </div>
+  </header>
+
+  <main id="main" class="flex-1 w-full pt-14 pb-20">
+    <div class="app-viewport w-full">
+      <div class="px-4 pt-4">
+        <p class="kicker m-0">My Closet</p>
+        <h1 class="font-headline-md text-[26px] leading-tight text-primary mt-1">내 옷장</h1>
+        <p class="text-[13px] text-on-surface-variant mt-1">가지고 있는 옷을 사진으로 등록하면, 내 옷으로 만들 수 있는 출근 코디 조합과 그 이유를 보여 드립니다.</p>
+        <div class="note-box mt-3 text-[13px]">
+          <b class="text-primary">사진은 이 브라우저에만 저장됩니다.</b>
+          <ul class="list-disc pl-5 mt-1 space-y-0.5">
+            <li>서버로 보내지 않으며, 다른 기기나 다른 브라우저에서는 보이지 않습니다.</li>
+            <li>옷만 바닥이나 옷걸이에 두고 찍어 주세요. 얼굴이 나온 사진은 피해 주세요.</li>
+            <li>추천은 AI 분석이 아니라 <a class="underline" href="#closet-rules">공개된 규칙표</a>로 계산합니다.</li>
+          </ul>
+        </div>
+      </div>
+
+      <section class="px-4 mt-5" aria-labelledby="h-add">
+        <div class="card p-4">
+          <h2 id="h-add" class="text-[17px] font-bold text-primary">옷 등록</h2>
+          <form id="closetForm" class="mt-3 flex flex-col gap-4" novalidate>
+            <div>
+              <label for="photoInput" class="btn btn-dark cursor-pointer"><span class="material-symbols-outlined text-[18px]">add_a_photo</span>사진 고르기</label>
+              <input id="photoInput" type="file" accept="image/*" class="sr-only">
+              <div id="photoPreviewWrap" class="mt-3 flex items-center gap-3" hidden>
+                <img id="photoPreview" alt="등록할 옷 사진 미리보기" class="w-24 h-24 rounded-lg object-cover bg-fresh-beige border border-hairline-border">
+                <p id="colorHint" class="text-[12px] text-on-surface-variant m-0"></p>
+              </div>
+            </div>
+            <fieldset>
+              <legend class="text-[14px] font-bold text-primary mb-2">종류</legend>
+              <div class="grid grid-cols-4 gap-2" id="catChoices"></div>
+            </fieldset>
+            <fieldset>
+              <legend class="text-[14px] font-bold text-primary mb-2">색</legend>
+              <div class="grid grid-cols-4 gap-2" id="colorChoices"></div>
+            </fieldset>
+            <fieldset>
+              <legend class="text-[14px] font-bold text-primary mb-2">핏</legend>
+              <div class="grid grid-cols-3 gap-2" id="fitChoices"></div>
+            </fieldset>
+            <div>
+              <label for="memoInput" class="text-[14px] font-bold text-primary">메모 <span class="font-normal text-[12px] text-on-surface-variant">(선택, 30자)</span></label>
+              <input id="memoInput" type="text" maxlength="30" placeholder="예: 회사용 네이비 재킷" class="mt-1 w-full rounded-lg border-hairline-border text-[14px]">
+            </div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <button type="submit" id="addBtn" class="btn btn-dark"><span class="material-symbols-outlined text-[18px]">checkroom</span>옷장에 추가</button>
+              <p id="formStatus" class="text-[12px] text-on-surface-variant m-0" aria-live="polite"></p>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="px-4 mt-6" aria-labelledby="h-items">
+        <h2 id="h-items" class="text-[17px] font-bold text-primary">내 옷 <span id="itemCount" class="text-[13px] font-semibold text-secondary"></span></h2>
+        <div id="closetList" class="mt-2 grid grid-cols-2 sm:grid-cols-3 gap-2" aria-live="polite"></div>
+      </section>
+
+      <section class="px-4 mt-6" aria-labelledby="h-outfits">
+        <h2 id="h-outfits" class="text-[17px] font-bold text-primary">내 옷으로 만든 출근 코디</h2>
+        <p class="text-[12px] text-on-surface-variant mt-0.5">아래 규칙표 점수가 높은 조합부터 최대 5개를 보여 드립니다.</p>
+        <div id="outfitList" class="mt-2 flex flex-col gap-3" aria-live="polite"></div>
+      </section>
+
+      <section id="closet-rules" class="px-4 mt-6 prose-s" aria-labelledby="h-crules">
+        <h2 id="h-crules">추천 규칙표</h2>
+        <p>상의·하의·신발 조합마다 아래 점수를 더해 높은 순으로 보여 드립니다. 아우터를 등록했다면 점수가 가장 좋은 아우터 하나를 덧붙입니다. 기준은 <a href="guide.html">스타일 가이드</a>와 같습니다.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>규칙</th><th>조건</th><th>점수</th></tr></thead>
+            <tbody>
+              <tr><td rowspan="3">명암</td><td>상의가 하의보다 밝음</td><td>+3</td></tr>
+              <tr><td>위아래 명암이 비슷함</td><td>+1</td></tr>
+              <tr><td>상의가 하의보다 어두움</td><td>+1</td></tr>
+              <tr><td>포인트 색</td><td>없음 / 1개 / 2개 이상</td><td>+1 / +2 / −3</td></tr>
+              <tr><td>비슷한 계열색</td><td>아이보리·베이지·카멜 중 서로 다른 두 색을 위아래로</td><td>−2</td></tr>
+              <tr><td>핏</td><td>위아래 모두 와이드 / 한쪽만 와이드 / 둘 다 정돈</td><td>−2 / +2 / +1</td></tr>
+              <tr><td>신발</td><td>하의와 같은 색 또는 둘 다 어두움 / 밝은 상의와 같은 밝은 색 / 포인트 색</td><td>+2 / +1 / −1</td></tr>
+              <tr><td>아우터</td><td>하의와 같은 색 / 상의와 명암이 다름 / 하의와 둘 다 와이드 / 포인트 색이 겹침</td><td>+2 / +1 / −2 / −2</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-[12px] text-on-surface-variant">색은 사진 가운데 부분을 읽어 기본 색 16가지 중 가장 가까운 색을 골라 둡니다. 조명이나 배경 때문에 틀릴 수 있으니 등록 전에 확인해 주세요. 규칙표 작성 2026-11-04.</p>
+      </section>
+
+      <div class="px-4 mt-4">
+        <button type="button" id="clearCloset" class="btn"><span class="material-symbols-outlined text-[18px]">delete_sweep</span>옷장 모두 지우기</button>
+      </div>
+    </div>
+
+    <footer class="app-viewport px-4 pt-8 pb-6 mt-6 border-t border-hairline-border text-[12px] text-on-surface-variant">
+      <nav aria-label="사이트 정보" class="flex flex-wrap gap-x-4 gap-y-2 font-semibold text-primary">
+        <a href="about.html" class="hover:underline">사이트 소개</a>
+        <a href="contact.html" class="hover:underline">문의</a>
+        <a href="privacy.html" class="hover:underline">개인정보처리방침</a>
+        <a href="affiliate.html" class="hover:underline">광고·제휴 안내</a>
+      </nav>
+      <p class="mt-3 leading-relaxed">STYL.AI는 직장인을 위한 실용 코디 가이드입니다. 상품을 직접 판매하지 않으며, 가격은 이해를 돕기 위한 예시 범위입니다.</p>
+      <p class="mt-1">© 2026 STYL.AI</p>
+    </footer>
+  </main>
+
+  <nav class="fixed bottom-0 left-0 right-0 z-50 pb-safe bg-surface/95 backdrop-blur-xl border-t border-hairline-border" aria-label="주요 메뉴">
+    <div class="h-16 app-viewport px-1 flex items-center justify-around">
+      <a class="tab" data-nav="home" href="./"><span class="material-symbols-outlined">home</span><span>홈</span></a>
+      <a class="tab" data-nav="lookbook" href="lookbook.html"><span class="material-symbols-outlined">collections_bookmark</span><span>코디 룩북</span></a>
+      <a class="tab" data-nav="guide" href="guide.html"><span class="material-symbols-outlined">menu_book</span><span>스타일 가이드</span></a>
+      <a class="tab" data-nav="recommend" href="recommend.html"><span class="material-symbols-outlined">tune</span><span>조건별 추천</span></a>
+      <a class="tab" data-nav="closet" href="closet.html"><span class="material-symbols-outlined">checkroom</span><span>내 옷장</span></a>
+    </div>
+  </nav>
+
+  <div id="toast" role="status" aria-live="polite" class="fixed top-20 left-1/2 -translate-x-1/2 z-[60] px-4 py-2 rounded-full bg-primary text-white text-[13px] shadow-xl transition-all duration-300 opacity-0 pointer-events-none -translate-y-2 max-w-[90vw] text-center"></div>
+
+  <script src="assets/site.js?v=92be9b19"></script>
+  <script src="assets/closet-rules.js?v=99ad8132"></script>
+  <script src="assets/closet.js?v=dec0b159"></script>
+</body>
+</html>

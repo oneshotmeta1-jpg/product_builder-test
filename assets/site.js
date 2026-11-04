@@ -3,7 +3,7 @@
   'use strict';
 
   var page = document.body.getAttribute('data-page') || '';
-  var navKey = { home: 'home', lookbook: 'lookbook', guide: 'guide', recommend: 'recommend' }[page];
+  var navKey = { home: 'home', lookbook: 'lookbook', guide: 'guide', recommend: 'recommend', closet: 'closet' }[page];
   if (navKey) {
     var cur = document.querySelector('[data-nav="' + navKey + '"]');
     if (cur) cur.setAttribute('aria-current', 'page');

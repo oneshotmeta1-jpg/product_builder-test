@@ -8,7 +8,7 @@ body { font-family: Manrope, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Goth
 :focus-visible { outline: 2px solid #8c6b4d; outline-offset: 2px; }
 
 /* bottom menu */
-.tab { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-width: 72px; height: 48px; color: #4c4640; font-size: 11px; font-weight: 600; letter-spacing: .02em; }
+.tab { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-width: 62px; height: 48px; color: #4c4640; font-size: 11px; font-weight: 600; letter-spacing: .02em; }
 .tab .material-symbols-outlined { font-size: 22px; }
 .tab[aria-current="page"] { color: #1f1d1b; }
 .tab[aria-current="page"] .material-symbols-outlined { font-variation-settings: 'FILL' 1; }
@@ -56,3 +56,6 @@ body { font-family: Manrope, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Goth
 
 /* cards and buttons inside article text keep their own look (no body-link underline) */
 .prose-s a.card, .prose-s a.btn, .prose-s .not-prose a:not(.underline) { text-decoration: none; color: inherit; }
+
+/* the hidden attribute always wins over utility display classes (flex, grid) */
+[hidden] { display: none !important; }
