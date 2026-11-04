@@ -31,7 +31,10 @@
     try {
       var raw = localStorage.getItem(KEY);
       var list = raw ? JSON.parse(raw) : [];
-      return Array.isArray(list) ? list : [];
+      if (!Array.isArray(list)) return [];
+      // LOOK 01 moved from lookbook.html (now the look list) to look-01.html in R3
+      list.forEach(function (x) { if (x && x.id === 'look-01' && x.url === 'lookbook.html') x.url = 'look-01.html'; });
+      return list;
     } catch (e) { storageOk = false; return []; }
   }
   function writeSaved(list) {
