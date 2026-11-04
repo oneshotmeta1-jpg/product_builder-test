@@ -46,7 +46,9 @@ def build():
         if out == "404.html":
             canon = f'<link rel="canonical" href="https://ai-stylelist.pages.dev/{path}">'
             assert canon in page
-            page = page.replace(canon, '<meta name="robots" content="noindex">')
+            # served at any depth (e.g. /a/b), so resolve assets and links from the site root
+            page = page.replace(canon, '<meta name="robots" content="noindex">
+  <base href="/">')
         assert "{{" not in page, f"unfilled placeholder in {out}"
         (ROOT / out).write_text(page, encoding="utf-8", newline="\n")
         print("built", out)
