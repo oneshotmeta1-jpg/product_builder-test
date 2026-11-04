@@ -27,7 +27,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <script src="assets/tw-config.js?v=9fb91365"></script>
-  <link rel="stylesheet" href="assets/site.css?v=86cd0e93">
+  <link rel="stylesheet" href="assets/site.css?v=f937a9dd">
 </head>
 <body class="bg-surface text-on-surface min-h-screen flex flex-col antialiased selection:bg-secondary/20" data-page="lookbook">
 
@@ -53,7 +53,12 @@
   <main id="main" class="flex-1 w-full pt-14 pb-20">
     <div class="app-viewport w-full">
       <article class="prose-s">
-        <div class="px-4 pt-4 pb-3 border-b border-hairline-border">
+        <div class="px-4 pt-4 pb-3 border-b border-hairline-border sm:grid sm:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] sm:gap-4 sm:items-center">
+          <figure class="card overflow-hidden m-0 not-prose">
+            <img src="images/look02-full.jpg" alt="네이비 셋업 재킷 단추를 잠그고 흰 셔츠, 네이비 스트레이트 슬랙스, 블랙 낮은 굽 펌프스를 갖춘 전신 착장" width="765" height="1024" loading="eager" fetchpriority="high" onerror="this.onerror=null;this.src='images/look02-outer.jpg'" class="w-full h-auto aspect-[3/4] object-cover object-top bg-fresh-beige block">
+            <figcaption class="px-3 py-2 text-[11px] text-on-surface-variant border-t border-hairline-border">AI 이미지 생성 도구로 만든 연출 이미지입니다.</figcaption>
+          </figure>
+          <div class="mt-3 sm:mt-0">
           <div class="flex items-center gap-1.5 not-prose">
             <span class="px-2 py-0.5 rounded bg-editorial-charcoal text-white text-[11px] font-bold">LOOK 02</span>
             <span class="px-2 py-0.5 rounded bg-fresh-beige text-on-secondary-container text-[11px] font-semibold border border-hairline-border">면접 · 비즈니스 포멀</span>
@@ -66,6 +71,7 @@
               <span class="material-symbols-outlined text-[18px]">bookmark_border</span><span data-save-label>저장</span>
             </button>
             <button type="button" class="btn" data-copy-link="look-02.html"><span class="material-symbols-outlined text-[18px]">link</span>링크 복사</button>
+          </div>
           </div>
         </div>
         <div class="px-4 py-3">
