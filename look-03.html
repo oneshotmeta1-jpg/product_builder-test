@@ -26,8 +26,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script src="assets/tw-config.js?v=9fb91365"></script>
-  <link rel="stylesheet" href="assets/site.css?v=86cd0e93">
+  <script src="assets/tw-config.js?v=c2daf7a7"></script>
+  <link rel="stylesheet" href="assets/site.css?v=d66d1bfb">
 </head>
 <body class="bg-surface text-on-surface min-h-screen flex flex-col antialiased selection:bg-secondary/20" data-page="lookbook">
 
@@ -53,7 +53,12 @@
   <main id="main" class="flex-1 w-full pt-14 pb-20">
     <div class="app-viewport w-full">
       <article class="prose-s">
-        <div class="px-4 pt-4 pb-3 border-b border-hairline-border">
+        <div class="px-4 pt-4 pb-3 border-b border-hairline-border sm:grid sm:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] sm:gap-4 sm:items-center">
+          <figure class="card overflow-hidden m-0 not-prose">
+            <img src="images/look03-full.jpg" alt="그레이 니트 카디건을 열어 입고 흰 티셔츠 앞부분을 베이지 와이드 치노에 넣은 뒤 흰 가죽 스니커즈를 신은 전신 착장" width="765" height="1024" loading="eager" fetchpriority="high" onerror="this.onerror=null;this.src='images/look03-outer.jpg'" class="w-full h-auto aspect-[3/4] object-cover object-top bg-fresh-beige block">
+            <figcaption class="px-3 py-2 text-[11px] text-on-surface-variant border-t border-hairline-border">AI 이미지 생성 도구로 만든 연출 이미지입니다.</figcaption>
+          </figure>
+          <div class="mt-3 sm:mt-0">
           <div class="flex items-center gap-1.5 not-prose">
             <span class="px-2 py-0.5 rounded bg-editorial-charcoal text-white text-[11px] font-bold">LOOK 03</span>
             <span class="px-2 py-0.5 rounded bg-fresh-beige text-on-secondary-container text-[11px] font-semibold border border-hairline-border">캐주얼 · 금요일·IT 회사</span>
@@ -66,6 +71,7 @@
               <span class="material-symbols-outlined text-[18px]">bookmark_border</span><span data-save-label>저장</span>
             </button>
             <button type="button" class="btn" data-copy-link="look-03.html"><span class="material-symbols-outlined text-[18px]">link</span>링크 복사</button>
+          </div>
           </div>
         </div>
         <div class="px-4 py-3">
@@ -298,7 +304,7 @@
 
   <div id="toast" role="status" aria-live="polite" class="fixed top-20 left-1/2 -translate-x-1/2 z-[60] px-4 py-2 rounded-full bg-primary text-white text-[13px] shadow-xl transition-all duration-300 opacity-0 pointer-events-none -translate-y-2 max-w-[90vw] text-center"></div>
 
-  <script src="assets/site.js?v=a50dc967"></script>
+  <script src="assets/site.js?v=5e9e9777"></script>
 
 </body>
 </html>

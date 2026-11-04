@@ -51,6 +51,8 @@ def load_looks():
         assert len(lk["budget"]) == 3, f"LOOK {lk['no']} needs 3 budget rows (low, mid, high)"
         for it in lk["items"]:
             assert (ROOT / it["img"]).exists(), f"missing image {it['img']}"
+        if lk.get("full"):
+            assert (ROOT / lk["full"]["img"]).exists(), f"missing image {lk['full']['img']}"
         for r in lk.get("recommend", []):
             assert r["f"] in FORMALITY and r["p"] in FIT and r["rank"] in (1, 2), f"bad recommend tag in LOOK {lk['no']}"
     # every formality x fit combination needs one first pick and at least one alternative
@@ -129,12 +131,31 @@ def render_prev_next(looks, lk):
     return "\n".join(out)
 
 
+def full_image(lk):
+    """Full-outfit photo for a look: (src, alt, fallback src). Falls back to the outer item photo when a look has none."""
+    first = lk["items"][0]
+    full = lk.get("full") or {}
+    return full.get("img", first["img"]), full.get("alt", first["alt"]), first["img"]
+
+
+def img_fallback(fallback):
+    # if the full photo fails to load, show the outer item photo instead of an empty box (then stop retrying)
+    return f'onerror="this.onerror=null;this.src=\'{a(fallback)}\'"'
+
+
 def render_look(lk, looks):
     no, file = lk["no"], f"look-{lk['no']}.html"
+    src, alt, fb = full_image(lk)
     out = []
     w = out.append
     w('      <article class="prose-s">')
-    w('        <div class="px-4 pt-4 pb-3 border-b border-hairline-border">')
+    # phone: full-outfit photo first, then title; wider screens: photo and title side by side
+    w('        <div class="px-4 pt-4 pb-3 border-b border-hairline-border sm:grid sm:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] sm:gap-4 sm:items-center">')
+    w('          <figure class="card overflow-hidden m-0 not-prose">')
+    w(f'            <img src="{src}" alt="{a(alt)}" width="765" height="1024" loading="eager" fetchpriority="high" {img_fallback(fb)} class="w-full h-auto aspect-[3/4] object-cover object-top bg-fresh-beige block">')
+    w('            <figcaption class="px-3 py-2 text-[11px] text-on-surface-variant border-t border-hairline-border">AI 이미지 생성 도구로 만든 연출 이미지입니다.</figcaption>')
+    w('          </figure>')
+    w('          <div class="mt-3 sm:mt-0">')
     w('          <div class="flex items-center gap-1.5 not-prose">')
     w(f'            <span class="px-2 py-0.5 rounded bg-editorial-charcoal text-white text-[11px] font-bold">LOOK {no}</span>')
     w(f'            <span class="px-2 py-0.5 rounded bg-fresh-beige text-on-secondary-container text-[11px] font-semibold border border-hairline-border">{lk["tag"]}</span>')
@@ -147,6 +168,7 @@ def render_look(lk, looks):
     w('              <span class="material-symbols-outlined text-[18px]">bookmark_border</span><span data-save-label>저장</span>')
     w('            </button>')
     w(f'            <button type="button" class="btn" data-copy-link="{file}"><span class="material-symbols-outlined text-[18px]">link</span>링크 복사</button>')
+    w('          </div>')
     w('          </div>')
     w('        </div>')
     # tiles
@@ -291,12 +313,11 @@ def render_list(looks):
     w('      <div class="px-4 mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">')
     for lk in looks:
         no = lk["no"]
-        w(f'        <a href="look-{no}.html" class="card overflow-hidden block">')
-        w('          <div class="grid grid-cols-2 gap-px bg-hairline-border" aria-hidden="true">')
-        for it in lk["items"]:
-            w(f'            <img alt="" class="w-full aspect-square object-cover bg-fresh-beige" loading="lazy" onerror="this.style.visibility=\'hidden\'" src="{it["img"]}">')
-        w('          </div>')
-        w('          <div class="p-3">')
+        src, alt, fb = full_image(lk)
+        w(f'        <a href="look-{no}.html" class="card overflow-hidden flex flex-col">')
+        # photos are 3:4 like the box, so head and shoes are not cropped
+        w(f'          <img src="{src}" alt="{a(alt)}" width="765" height="1024" loading="lazy" {img_fallback(fb)} class="w-full h-auto aspect-[3/4] object-cover object-top bg-fresh-beige block">')
+        w('          <div class="p-3 flex-1">')
         w('            <div class="flex flex-wrap items-center gap-1.5">')
         w(f'              <span class="px-2 py-0.5 rounded bg-editorial-charcoal text-white text-[11px] font-bold">LOOK {no}</span>')
         for t in lk["card_tags"]:
@@ -330,7 +351,9 @@ def write_page(layout, out, title, desc, nav_slug, scripts, body):
     # cache-bust our own CSS/JS: the ?v= changes whenever the file content changes, so browsers fetch the new file
     def bust(m):
         f = ROOT / m.group(2)
-        return f'{m.group(1)}"{m.group(2)}?v={hashlib.sha1(f.read_bytes()).hexdigest()[:8]}"' if f.exists() else m.group(0)
+        # hash with LF line endings so a Windows CRLF checkout does not change the version of an unchanged file
+        data = f.read_bytes().replace(b"\r\n", b"\n")
+        return f'{m.group(1)}"{m.group(2)}?v={hashlib.sha1(data).hexdigest()[:8]}"' if f.exists() else m.group(0)
     page = re.sub(r'(src=|href=)"(assets/[\w.-]+\.(?:css|js))"', bust, page)
     assert "{{" not in page, f"unfilled placeholder in {out}"
     (ROOT / out).write_text(page, encoding="utf-8", newline="\n")
