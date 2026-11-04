@@ -1,7 +1,7 @@
       <div class="px-4 pt-4">
         <p class="kicker m-0">My Closet</p>
         <h1 class="font-headline-md text-[26px] leading-tight text-primary mt-1">내 옷장</h1>
-        <p class="text-[13px] text-on-surface-variant mt-1">가지고 있는 옷을 사진으로 등록하면, 내 옷으로 만들 수 있는 출근 코디 조합과 그 이유를 보여 드립니다.</p>
+        <p class="text-[14px] text-primary font-semibold mt-1">내 옷을 찍어 두고, 오늘 상황만 고르세요. 가진 옷으로 입을 조합을 골라 드립니다.</p>
         <div class="note-box mt-3 text-[13px]">
           <b class="text-primary">사진은 이 브라우저에만 저장됩니다.</b>
           <ul class="list-disc pl-5 mt-1 space-y-0.5">
@@ -11,6 +11,26 @@
           </ul>
         </div>
       </div>
+
+      <section id="chosenBox" class="px-4 mt-5" aria-labelledby="h-chosen" hidden>
+        <div class="card p-4 border-2 !border-editorial-charcoal">
+          <div class="flex items-center justify-between gap-2">
+            <h2 id="h-chosen" class="text-[17px] font-bold text-primary">내일 입을 코디</h2>
+            <button type="button" id="rechoose" class="btn !h-9 !px-3 !text-[12px]">다시 고르기</button>
+          </div>
+          <div id="chosenBody" class="mt-3"></div>
+        </div>
+      </section>
+
+      <section class="px-4 mt-5" aria-labelledby="h-start">
+        <div class="card p-4 bg-fresh-beige">
+          <h2 id="h-start" class="text-[17px] font-bold text-primary">처음이라면 5벌만</h2>
+          <p class="text-[13px] text-on-surface-variant mt-0.5">자주 입는 <b class="text-primary">상의 2개, 하의 2개, 신발 1개</b>만 등록해 보세요. 칸이 다 차면 추천을 시작할 수 있어요.</p>
+          <div id="progressSlots" class="mt-3 flex justify-between gap-1" aria-label="등록 진행 상황"></div>
+          <p id="progressText" class="text-[12px] text-on-surface-variant mt-3 m-0" aria-live="polite"></p>
+          <button type="button" id="startBtn" class="btn btn-dark w-full mt-3" disabled><span class="material-symbols-outlined text-[18px]">auto_awesome</span>추천 시작</button>
+        </div>
+      </section>
 
       <section class="px-4 mt-5" aria-labelledby="h-add">
         <div class="card p-4">
@@ -36,6 +56,10 @@
               <legend class="text-[14px] font-bold text-primary mb-2">핏</legend>
               <div class="grid grid-cols-3 gap-2" id="fitChoices"></div>
             </fieldset>
+            <fieldset>
+              <legend class="text-[14px] font-bold text-primary mb-2">입는 계절</legend>
+              <div class="grid grid-cols-4 gap-2" id="seasonChoices"></div>
+            </fieldset>
             <div>
               <label for="memoInput" class="text-[14px] font-bold text-primary">메모 <span class="font-normal text-[12px] text-on-surface-variant">(선택, 30자)</span></label>
               <input id="memoInput" type="text" maxlength="30" placeholder="예: 회사용 네이비 재킷" class="mt-1 w-full rounded-lg border-hairline-border text-[14px]">
@@ -53,15 +77,18 @@
         <div id="closetList" class="mt-2 grid grid-cols-2 sm:grid-cols-3 gap-2" aria-live="polite"></div>
       </section>
 
-      <section class="px-4 mt-6" aria-labelledby="h-outfits">
-        <h2 id="h-outfits" class="text-[17px] font-bold text-primary">내 옷으로 만든 출근 코디</h2>
-        <p class="text-[12px] text-on-surface-variant mt-0.5">아래 규칙표 점수가 높은 조합부터 최대 5개를 보여 드립니다.</p>
+      <section id="recSection" class="px-4 mt-6" aria-labelledby="h-rec" hidden>
+        <h2 id="h-rec" class="text-[17px] font-bold text-primary">오늘 상황</h2>
+        <div id="situationChoices" class="mt-2 flex flex-col gap-2"></div>
+        <p id="situationSummary" class="text-[12px] text-on-surface-variant mt-2" aria-live="polite"></p>
+        <h2 class="text-[17px] font-bold text-primary mt-4">추천 코디 3개</h2>
+        <p class="text-[12px] text-on-surface-variant mt-0.5">마음에 드는 코디의 ‘이대로 입기’를 누르면 맨 위 ‘내일 입을 코디’에 저장됩니다.</p>
         <div id="outfitList" class="mt-2 flex flex-col gap-3" aria-live="polite"></div>
       </section>
 
       <section id="closet-rules" class="px-4 mt-6 prose-s" aria-labelledby="h-crules">
         <h2 id="h-crules">추천 규칙표</h2>
-        <p>상의·하의·신발 조합마다 아래 점수를 더해 높은 순으로 보여 드립니다. 아우터를 등록했다면 점수가 가장 좋은 아우터 하나를 덧붙입니다. 기준은 <a href="guide.html">스타일 가이드</a>와 같습니다.</p>
+        <p>먼저 오늘 입을 수 없는 옷을 뺍니다. 더운 날에는 겨울옷과 아우터, 추운 날에는 여름옷, 보통 날씨에는 여름·겨울옷을 빼고, 사계절 옷은 항상 씁니다. 남은 옷으로 상의·하의·신발 조합마다 아래 점수를 더해, 상의와 하의가 겹치지 않는 3개를 보여 드립니다. 고객 미팅이나 추운 날에는 아우터를 꼭 더하고, 그 밖에는 점수가 좋은 아우터가 있을 때만 더합니다. 기준은 <a href="guide.html">스타일 가이드</a>와 같습니다.</p>
         <div class="table-wrap">
           <table>
             <thead><tr><th>규칙</th><th>조건</th><th>점수</th></tr></thead>
@@ -74,6 +101,13 @@
               <tr><td>핏</td><td>위아래 모두 와이드 / 한쪽만 와이드 / 둘 다 정돈</td><td>−2 / +2 / +1</td></tr>
               <tr><td>신발</td><td>하의와 같은 색 또는 둘 다 어두움 / 밝은 상의와 같은 밝은 색 / 포인트 색</td><td>+2 / +1 / −1</td></tr>
               <tr><td>아우터</td><td>하의와 같은 색 / 상의와 명암이 다름 / 하의와 둘 다 와이드 / 포인트 색이 겹침</td><td>+2 / +1 / −2 / −2</td></tr>
+              <tr><td rowspan="3">격식</td><td>고객 미팅: 아우터 포함</td><td>+2</td></tr>
+              <tr><td>고객 미팅: 포인트 색 있음 / 밝은 신발</td><td>−2 / −2</td></tr>
+              <tr><td>편한 날: 밝은 신발</td><td>+1</td></tr>
+              <tr><td rowspan="3">날씨</td><td>비: 밝은 하의나 신발 / 어두운 신발</td><td>−2 / +1</td></tr>
+              <tr><td>추움: 아우터 포함</td><td>+2</td></tr>
+              <tr><td>더움: 와이드 하의</td><td>+1</td></tr>
+              <tr><td>이동</td><td>많이 걸음: 슬림 하의 / 레귤러·와이드 하의</td><td>−1 / +1</td></tr>
             </tbody>
           </table>
         </div>
@@ -81,5 +115,6 @@
       </section>
 
       <div class="px-4 mt-4">
+        <p id="storageUsage" class="text-[12px] text-on-surface-variant mb-2"></p>
         <button type="button" id="clearCloset" class="btn"><span class="material-symbols-outlined text-[18px]">delete_sweep</span>옷장 모두 지우기</button>
       </div>
