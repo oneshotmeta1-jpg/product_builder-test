@@ -24,6 +24,8 @@ PAGES = {
     "contact": ("contact.html", "문의 - STYL.AI", "STYL.AI에 오류 제보, 주제 제안, 제휴 문의를 보내는 방법.", []),
     "privacy": ("privacy.html", "개인정보처리방침 - STYL.AI", "STYL.AI의 광고·통계 쿠키와 브라우저 저장 기능의 정보 처리 방식.", []),
     "affiliate": ("affiliate.html", "광고·제휴 안내 - STYL.AI", "STYL.AI의 광고 게재와 제휴 링크 표기 기준.", []),
+    # Cloudflare Pages returns this with status 404 for unknown paths (without it, every path serves index.html as 200)
+    "notfound": ("404.html", "페이지를 찾을 수 없습니다 - STYL.AI", "요청한 페이지가 없습니다.", []),
 }
 
 
@@ -41,6 +43,10 @@ def build():
                 .replace("{{slug}}", slug)
                 .replace("{{scripts}}", tags)
                 .replace("{{body}}", body))
+        if out == "404.html":
+            canon = f'<link rel="canonical" href="https://ai-stylelist.pages.dev/{path}">'
+            assert canon in page
+            page = page.replace(canon, '<meta name="robots" content="noindex">')
         assert "{{" not in page, f"unfilled placeholder in {out}"
         (ROOT / out).write_text(page, encoding="utf-8", newline="\n")
         print("built", out)
