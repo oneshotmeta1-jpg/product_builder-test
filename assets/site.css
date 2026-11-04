@@ -1,0 +1,55 @@
+html, body { margin: 0; padding: 0; background: #faf9f6; }
+body { font-family: Manrope, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; font-size: 14px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.app-viewport { width: 100%; max-width: 560px; margin-left: auto; margin-right: auto; position: relative; }
+.pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+.pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+.skip-link { position: absolute; left: -9999px; top: 0; z-index: 100; background: #1f1d1b; color: #fff; padding: 8px 12px; }
+.skip-link:focus { left: 8px; top: 8px; }
+:focus-visible { outline: 2px solid #8c6b4d; outline-offset: 2px; }
+
+/* bottom menu */
+.tab { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-width: 72px; height: 48px; color: #4c4640; font-size: 11px; font-weight: 600; letter-spacing: .02em; }
+.tab .material-symbols-outlined { font-size: 22px; }
+.tab[aria-current="page"] { color: #1f1d1b; }
+.tab[aria-current="page"] .material-symbols-outlined { font-variation-settings: 'FILL' 1; }
+
+/* article typography */
+.prose-s h2 { font-family: "Bodoni Moda", serif; font-size: 22px; line-height: 1.35; color: #1f1d1b; margin: 28px 0 10px; }
+.prose-s h3 { font-size: 15px; font-weight: 700; color: #1f1d1b; margin: 18px 0 6px; }
+.prose-s p { margin: 0 0 10px; color: #2b2825; }
+.prose-s ul, .prose-s ol { margin: 0 0 12px; padding-left: 20px; }
+.prose-s ul { list-style: disc; }
+.prose-s ol { list-style: decimal; }
+.prose-s li { margin: 4px 0; }
+.prose-s a { color: #69492a; text-decoration: underline; text-underline-offset: 2px; }
+.prose-s strong { color: #1f1d1b; }
+.prose-s table { width: 100%; border-collapse: collapse; margin: 6px 0 14px; font-size: 13px; }
+.prose-s th, .prose-s td { border: 1px solid #E8E3DA; padding: 7px 8px; text-align: left; vertical-align: top; }
+.prose-s th { background: #F4F1EA; font-weight: 700; color: #1f1d1b; }
+.table-wrap { overflow-x: auto; }
+
+.card { background: #fff; border: 1px solid #ece7de; border-radius: 14px; }
+.note-box { background: #faf8f5; border: 1px solid #eee9e1; border-radius: 12px; padding: 12px 14px; font-size: 13px; }
+.kicker { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #8c6b4d; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 40px; padding: 0 14px; border-radius: 10px; font-size: 13px; font-weight: 700; border: 1px solid #e5dfd5; background: #fff; color: #1f1d1b; cursor: pointer; }
+.btn:active { transform: scale(.98); }
+.btn-dark { background: #24211e; color: #fff; border-color: #24211e; }
+.btn-dark:hover { background: #34302c; }
+.btn[aria-pressed="true"] { background: #faeae0; color: #69492a; border-color: #eed9cb; }
+.btn[aria-pressed="true"] .material-symbols-outlined { font-variation-settings: 'FILL' 1; }
+
+/* recommendation choices */
+.choice { display: block; border: 1px solid #e5dfd5; background: #fff; border-radius: 12px; padding: 10px 12px; cursor: pointer; }
+.choice input { position: absolute; opacity: 0; pointer-events: none; }
+.choice b { display: block; font-size: 14px; color: #1f1d1b; }
+.choice span { display: block; font-size: 12px; color: #4c4640; }
+.choice:has(input:checked) { border-color: #8c6b4d; background: #faeae0; box-shadow: 0 0 0 1px #8c6b4d inset; }
+.choice:has(input:focus-visible) { outline: 2px solid #8c6b4d; outline-offset: 2px; }
+
+/* lookbook item tiles */
+.tile { position: relative; display: block; aspect-ratio: 1 / 1; background: #F4F1EA; overflow: hidden; }
+.tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.tile span { position: absolute; left: 8px; bottom: 8px; display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,.95); color: #1f1d1b; font-size: 12px; font-weight: 600; padding: 2px 8px 2px 2px; border-radius: 999px; border: 1px solid #ece6dc; }
+.tile span b { width: 22px; height: 22px; border-radius: 999px; background: #24211e; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 10px; }
+[id^="item-"]:target { box-shadow: 0 0 0 2px #8c6b4d; }
+[id] { scroll-margin-top: 72px; }
