@@ -26,8 +26,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script src="assets/tw-config.js"></script>
-  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/tw-config.js?v=9fb91365"></script>
+  <link rel="stylesheet" href="assets/site.css?v=86cd0e93">
 </head>
 <body class="bg-surface text-on-surface min-h-screen flex flex-col antialiased selection:bg-secondary/20" data-page="home">
 
@@ -59,7 +59,7 @@
       </section>
 
       <section class="px-4 mt-5" aria-labelledby="h-look">
-        <h2 id="h-look" class="text-[17px] font-bold text-primary mb-2">이번 주 룩북</h2>
+        <h2 id="h-look" class="text-[17px] font-bold text-primary mb-2">대표 룩북</h2>
         <a href="look-01.html" class="card overflow-hidden block">
           <div class="grid grid-cols-4 gap-px bg-hairline-border" aria-hidden="true">
             <img alt="" class="w-full aspect-square object-cover bg-fresh-beige" onerror="this.style.visibility='hidden'" src="images/item-blazer.jpg">
@@ -74,6 +74,40 @@
             <span class="text-[13px] font-semibold text-on-secondary-container mt-2 inline-flex items-center gap-1">룩북 읽기 <span class="material-symbols-outlined text-[18px]">arrow_forward</span></span>
           </div>
         </a>
+      </section>
+
+      <section class="px-4 mt-6" aria-labelledby="h-new">
+        <div class="flex items-baseline justify-between mb-2">
+          <h2 id="h-new" class="text-[17px] font-bold text-primary">상황별 룩북 더 보기</h2>
+          <a href="lookbook.html" class="text-[12px] font-semibold text-on-secondary-container">전체 보기</a>
+        </div>
+        <p class="text-[13px] text-on-surface-variant mb-2">면접, 금요일 캐주얼, 겨울 출근까지. 같은 기준으로 조합 이유와 예산·핏·관리법을 정리했습니다.</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+          <a href="look-02.html" class="card overflow-hidden flex sm:block">
+            <img alt="네이비 싱글 셋업 재킷" class="w-28 sm:w-full aspect-square object-cover bg-fresh-beige shrink-0" loading="lazy" onerror="this.style.visibility='hidden'" src="images/look02-outer.jpg">
+            <span class="p-3 block min-w-0">
+              <span class="px-2 py-0.5 rounded bg-editorial-charcoal text-white text-[11px] font-bold">LOOK 02</span>
+              <b class="block text-primary text-[14px] mt-1.5 leading-snug">면접·첫 출근 네이비 포멀 셋업</b>
+              <span class="block text-[12px] text-on-surface-variant mt-0.5">면접·첫 출근·고객 미팅에서 실수 없는 네이비 셋업.</span>
+            </span>
+          </a>
+          <a href="look-03.html" class="card overflow-hidden flex sm:block">
+            <img alt="그레이 니트 카디건" class="w-28 sm:w-full aspect-square object-cover bg-fresh-beige shrink-0" loading="lazy" onerror="this.style.visibility='hidden'" src="images/look03-outer.jpg">
+            <span class="p-3 block min-w-0">
+              <span class="px-2 py-0.5 rounded bg-editorial-charcoal text-white text-[11px] font-bold">LOOK 03</span>
+              <b class="block text-primary text-[14px] mt-1.5 leading-snug">금요일 캐주얼 니트 카디건 룩</b>
+              <span class="block text-[12px] text-on-surface-variant mt-0.5">블레이저 없이도 단정한 금요일·IT 회사 출근 코디.</span>
+            </span>
+          </a>
+          <a href="look-04.html" class="card overflow-hidden flex sm:block">
+            <img alt="차콜 울 롱코트" class="w-28 sm:w-full aspect-square object-cover bg-fresh-beige shrink-0" loading="lazy" onerror="this.style.visibility='hidden'" src="images/look04-outer.jpg">
+            <span class="p-3 block min-w-0">
+              <span class="px-2 py-0.5 rounded bg-editorial-charcoal text-white text-[11px] font-bold">LOOK 04</span>
+              <b class="block text-primary text-[14px] mt-1.5 leading-snug">겨울 출근 차콜 롱코트 룩</b>
+              <span class="block text-[12px] text-on-surface-variant mt-0.5">겹쳐 입어도 둔해 보이지 않는 겨울 출근 코디.</span>
+            </span>
+          </a>
+        </div>
       </section>
 
       <section class="px-4 mt-6" aria-labelledby="h-guide">
@@ -128,7 +162,7 @@
 
   <div id="toast" role="status" aria-live="polite" class="fixed top-20 left-1/2 -translate-x-1/2 z-[60] px-4 py-2 rounded-full bg-primary text-white text-[13px] shadow-xl transition-all duration-300 opacity-0 pointer-events-none -translate-y-2 max-w-[90vw] text-center"></div>
 
-  <script src="assets/site.js"></script>
+  <script src="assets/site.js?v=a50dc967"></script>
 
 </body>
 </html>

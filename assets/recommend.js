@@ -12,7 +12,6 @@
       },
       why: '격식 있는 자리에서는 위아래 같은 원단의 셋업과 어두운 무광 색이 가장 안전합니다. 소매 있는 상의를 입으면 재킷을 벗어야 할 때도 단정합니다.',
       avoid: '민소매·니트 티셔츠, 광택이 강한 소재, 스니커즈는 피하세요.',
-      look: { href: 'guide.html#dresscode', text: '복장 규정별 코디 바꾸기' }
     },
     biz: {
       label: '일반 출근',
@@ -22,7 +21,6 @@
       },
       why: '비즈니스 캐주얼은 블레이저 하나로 격식을 갖추고 나머지는 편한 기본 아이템으로 채우는 방식이 가장 활용도가 높습니다. 밝은 상의와 어두운 하의를 두면 시선이 위로 모입니다.',
       avoid: '블레이저와 애매하게 다른 베이지의 하의, 바닥에 끌리는 기장은 피하세요.',
-      look: { href: 'look-01.html', text: 'LOOK 01 미니멀 테일러드 오피스코어 룩' }
     },
     casual: {
       label: '캐주얼한 회사·외근',
@@ -32,7 +30,6 @@
       },
       why: '캐주얼한 회사나 이동이 많은 날에는 구김에 강하고 움직이기 편한 소재가 우선입니다. 니트 카디건이나 셔츠 재킷은 블레이저보다 힘이 빠지면서도 정돈된 느낌을 줍니다.',
       avoid: '로고가 큰 티셔츠, 해진 데님, 운동용 러닝화는 업무 자리에서 가볍게 보일 수 있습니다.',
-      look: { href: 'guide.html#dresscode', text: '복장 규정별 코디 바꾸기' }
     }
   };
 
@@ -75,6 +72,44 @@
   var hint = document.getElementById('recHint');
   if (!form || !out) return;
 
+  // Looks come from assets/looks-data.js, generated from src/looks/*.json (each look lists the conditions it fits).
+  var LOOKS = window.STYL_LOOKS || [];
+  var BUDGET_ROW = { low: 0, mid: 1, high: 2 };
+  function pickLooks(f, p) {
+    var res = { 1: null, 2: [] };
+    LOOKS.forEach(function (lk) {
+      (lk.recommend || []).forEach(function (r) {
+        if (r.f !== f || r.p !== p) return;
+        if (r.rank === 1 && !res[1]) res[1] = { look: lk, why: r.why };
+        else if (r.rank === 2) res[2].push({ look: lk, why: r.why });
+      });
+    });
+    return res;
+  }
+  function lookHtml(f, b, p) {
+    var pick = pickLooks(f, p);
+    if (!pick[1]) {
+      return '<div class="note-box mt-3">이 조건에 연결된 룩북이 아직 없습니다. <a class="underline" href="lookbook.html">코디 룩북 목록</a>에서 가까운 룩을 골라 보세요.</div>';
+    }
+    var lk = pick[1].look, row = (lk.budget || [])[BUDGET_ROW[b]];
+    var html =
+      '<h3 class="text-[15px] font-bold text-primary mt-4">이 조건에 맞는 룩북</h3>' +
+      '<a href="' + esc(lk.href) + '" class="card mt-2 flex gap-3 p-2 items-center">' +
+        '<img src="' + esc(lk.img) + '" alt="" class="w-20 h-20 rounded-lg object-cover bg-fresh-beige shrink-0" onerror="this.style.visibility=\'hidden\'">' +
+        '<span class="min-w-0"><span class="text-[11px] font-bold text-on-secondary-container">LOOK ' + esc(lk.no) + '</span>' +
+        '<b class="block text-[14px] text-primary leading-snug">' + esc(lk.title) + '</b>' +
+        '<span class="block text-[12px] text-on-surface-variant mt-0.5">' + esc(pick[1].why) + '</span></span>' +
+      '</a>';
+    if (row) {
+      html += '<p class="text-[12px] text-on-surface-variant mt-2">이 룩의 예산 ' + esc(row[0]) + ' 구성: ' + esc(row[1]) +
+        ' <a class="underline text-on-secondary-container" href="' + esc(lk.href) + '#h-budget">예산별 대안 보기</a></p>';
+    }
+    pick[2].forEach(function (alt) {
+      html += '<p class="text-[13px] mt-2"><b class="text-secondary">함께 볼 룩북</b> <a class="underline text-on-secondary-container" href="' + esc(alt.look.href) + '">LOOK ' + esc(alt.look.no) + ' ' + esc(alt.look.title) + '</a> — ' + esc(alt.why) + '</p>';
+    });
+    return html;
+  }
+
   function val(name) { var el = form.querySelector('input[name="' + name + '"]:checked'); return el ? el.value : ''; }
 
   function render(scroll) {
@@ -108,7 +143,7 @@
           '<li><b>핏 — ' + esc(P.label) + ':</b> ' + esc(P.why) + '</li>' +
         '</ol>' +
         '<div class="note-box mt-3"><b>입어 보고 확인:</b> ' + esc(P.check) + '<br><b>피할 것:</b> ' + esc(F.avoid) + '</div>' +
-        '<p class="text-[13px] mt-3">참고: <a class="underline text-on-secondary-container" href="' + esc(F.look.href) + '">' + esc(F.look.text) + '</a></p>' +
+        lookHtml(f, b, p) +
         '<div class="flex gap-2 mt-3">' +
           '<button type="button" class="btn" data-save-id="rec-' + f + '-' + b + '-' + p + '" data-save-title="추천: ' + esc(title) + '" data-save-url="recommend.html' + qs + '" data-save-note="' + esc(pc.outer + ' · ' + pc.bottom) + '">' +
             '<span class="material-symbols-outlined text-[18px]">bookmark_border</span><span data-save-label>저장</span></button>' +
