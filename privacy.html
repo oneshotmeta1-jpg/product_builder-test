@@ -27,7 +27,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <script src="assets/tw-config.js?v=c2daf7a7"></script>
-  <link rel="stylesheet" href="assets/site.css?v=d66d1bfb">
+  <link rel="stylesheet" href="assets/site.css?v=2b0ab014">
 </head>
 <body class="bg-surface text-on-surface min-h-screen flex flex-col antialiased selection:bg-secondary/20" data-page="privacy">
 
@@ -56,7 +56,7 @@
         <p class="kicker m-0">Privacy</p>
         <h1 class="font-headline-md text-[26px] leading-tight text-primary mt-1">개인정보처리방침</h1>
         <p>STYL.AI(이하 ‘사이트’)는 회원가입이나 로그인 기능이 없으며, 이름·연락처 같은 개인정보를 직접 입력받지 않습니다. 다만 아래와 같이 광고·통계 서비스와 브라우저 저장 기능을 사용합니다.</p>
-        <p class="text-[12px] text-on-surface-variant">시행일 2026-11-04</p>
+        <p class="text-[12px] text-on-surface-variant">시행일 2026-11-04 · 개정 2026-11-04 (내 옷장 항목 추가)</p>
 
         <h2>1. 사이트가 사용하는 기능과 처리되는 정보</h2>
         <div class="table-wrap">
@@ -67,6 +67,7 @@
               <tr><td>Google Analytics (방문 통계)</td><td>쿠키, 방문 페이지, 체류 시간, 대략적인 지역, 브라우저·기기 정보</td><td>Google (사이트 운영자는 통계 보고서만 확인)</td></tr>
               <tr><td>저장 목록</td><td>저장한 룩북·추천 결과의 제목과 주소, 저장 시각</td><td>방문자의 브라우저(localStorage)에만 보관, 서버로 전송하지 않음</td></tr>
               <tr><td>조건별 추천</td><td>고른 조건(격식·예산·핏)</td><td>브라우저 안에서만 계산, 서버로 전송하지 않음. 결과 주소에 조건이 표시됨</td></tr>
+              <tr><td>내 옷장</td><td>방문자가 올린 옷 사진(긴 변 480px로 줄인 사본), 종류·색·핏, 메모, 등록 시각</td><td>방문자의 브라우저(IndexedDB)에만 보관, 서버로 전송하지 않음. 색 추출과 코디 추천도 브라우저 안에서 계산</td></tr>
               <tr><td>호스팅 (Cloudflare Pages)</td><td>접속 기록(IP 주소, 요청 시각, 브라우저 정보)</td><td>Cloudflare, 서비스 제공과 보안 목적</td></tr>
             </tbody>
           </table>
@@ -84,6 +85,7 @@
         <ul>
           <li>브라우저 설정에서 쿠키를 차단하거나 삭제할 수 있습니다. 차단해도 사이트 글은 그대로 볼 수 있습니다.</li>
           <li>저장 목록은 <a href="saved.html">저장 목록</a> 페이지의 ‘삭제’·‘모두 지우기’ 또는 브라우저의 사이트 데이터 삭제로 지울 수 있습니다.</li>
+          <li>내 옷장의 사진과 정보는 <a href="closet.html">내 옷장</a> 페이지의 ‘삭제’·‘옷장 모두 지우기’ 또는 브라우저의 사이트 데이터 삭제로 지울 수 있습니다.</li>
           <li>Google Analytics 수집을 원하지 않으면 Google이 제공하는 <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">애널리틱스 차단 브라우저 부가기능</a>을 사용할 수 있습니다.</li>
         </ul>
 
@@ -113,12 +115,13 @@
       <a class="tab" data-nav="lookbook" href="lookbook.html"><span class="material-symbols-outlined">collections_bookmark</span><span>코디 룩북</span></a>
       <a class="tab" data-nav="guide" href="guide.html"><span class="material-symbols-outlined">menu_book</span><span>스타일 가이드</span></a>
       <a class="tab" data-nav="recommend" href="recommend.html"><span class="material-symbols-outlined">tune</span><span>조건별 추천</span></a>
+      <a class="tab" data-nav="closet" href="closet.html"><span class="material-symbols-outlined">checkroom</span><span>내 옷장</span></a>
     </div>
   </nav>
 
   <div id="toast" role="status" aria-live="polite" class="fixed top-20 left-1/2 -translate-x-1/2 z-[60] px-4 py-2 rounded-full bg-primary text-white text-[13px] shadow-xl transition-all duration-300 opacity-0 pointer-events-none -translate-y-2 max-w-[90vw] text-center"></div>
 
-  <script src="assets/site.js?v=5e9e9777"></script>
+  <script src="assets/site.js?v=92be9b19"></script>
 
 </body>
 </html>
