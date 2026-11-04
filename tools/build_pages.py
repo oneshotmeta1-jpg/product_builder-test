@@ -31,7 +31,8 @@ def build():
     layout = (SRC / "layout.html").read_text(encoding="utf-8")
     for slug, (out, title, desc, scripts) in PAGES.items():
         body = (SRC / "pages" / f"{slug}.html").read_text(encoding="utf-8").rstrip()
-        path = "" if out == "index.html" else out
+        # Cloudflare Pages serves /guide for guide.html (and redirects the .html form), so canonicals drop .html
+        path = "" if out == "index.html" else out[:-len(".html")]
         tags = "\n".join(f'  <script src="{s}"></script>' for s in scripts)
         page = (layout
                 .replace("{{title}}", html.escape(title))
